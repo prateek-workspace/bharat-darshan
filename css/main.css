@@ -103,9 +103,9 @@ a:active {
 .main-title{
   font-family: newfont;
   color: #FF5333;
-  margin-left: 40px;
+  margin-left: 20px;
   font-weight: 600;
-  font-size: 300%;
+  font-size: 200%;
 }
 .title span {
   color: #FF5333;
