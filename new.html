@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Page</title>
+</head>
+<body>
+    <form onsubmit="getFamousPlaces(event)">
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state">
+        <label for="district">District:</label>
+        <input type="text" id="district" name="district">
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+        function getFamousPlaces(event) {
+            event.preventDefault();
+
+            var state = document.getElementById('state').value;
+            var district = document.getElementById('district').value;
+
+            fetch(`https://api.opentripmap.com/0.1/en/places/geoname?apikey=YOUR_OPENTRIPMAP_API_KEY&country=IN&state=${state}&county=${district}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    if ("error" in data) {
+                        document.getElementById('results').innerText = data['error'];
+                    } else {
+                        var places = data.map(place => place.name).join(', ');
+                        document.getElementById('results').innerText = places;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('results').innerText = "Failed to fetch data. Please check your API key and parameters.";
+                });
+        }
+    </script>
+</body>
+</html>
