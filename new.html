@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Sample Page</title>
@@ -21,7 +21,7 @@
             var state = document.getElementById('state').value;
             var district = document.getElementById('district').value;
 
-            fetch(`https://api.opentripmap.com/0.1/en/places/geoname?apikey=YOUR_OPENTRIPMAP_API_KEY&country=IN&state=${state}&county=${district}&format=json`)
+            fetch(`https://api.opentripmap.com/0.1/en/places/geoname?apikey=5ae2e3f221c38a28845f05b688ef430502d421ea83bf34fad3653540&country=IN&state=${state}&county=${district}&format=json`)
                 .then(response => response.json())
                 .then(data => {
                     if ("error" in data) {
@@ -37,4 +37,53 @@
         }
     </script>
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function getFamousPlaces() {
+            var state = document.getElementById('state').value;
+            var district = document.getElementById('district').value;
+
+            var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            var targetUrl = 'https://api.opentripmap.com/0.1/en/places/geoname';
+            var apiKey = '5ae2e3f221c38a28845f05b688ef430502d421ea83bf34fad3653540';
+
+            $.ajax({
+                url: proxyUrl + targetUrl,
+                type: 'GET',
+                data: {
+                    apikey: apiKey,
+                    country: 'IN',
+                    state: state,
+                    county: district,
+                    format: 'json'
+                },
+                success: function(data) {
+                    var places = data.map(function(place) {
+                        return place.name;
+                    });
+                    document.getElementById('result').innerText = places.join(', ');
+                },
+                error: function() {
+                    document.getElementById('result').innerText = 'Failed to fetch data. Please try again later.';
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <label for="state">State:</label>
+    <input type="text" id="state" name="state">
+    <label for="district">District:</label>
+    <input type="text" id="district" name="district">
+    <button onclick="getFamousPlaces()">Get Famous Places</button>
+    <p id="result"></p>
+</body>
 </html>
+
