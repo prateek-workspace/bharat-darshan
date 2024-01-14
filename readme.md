@@ -1,4 +1,4 @@
-# 🕌 Bharat Darshan 🕌
+# 🛕Bharat Darshan 🛕
 
 ## 📝 Description 📝
 Welcome to 'Bharat Darshan'! 🎉 This repository contains a simple static website that showcases the beauty and diversity of India's famous pilgrimages. It's a great way for others to quickly understand the rich cultural heritage of India. 🚀
